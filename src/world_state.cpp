@@ -17,8 +17,8 @@ class sub_class{
 
     private:
         ros::NodeHandle n;
-		ros::Subscriber big_sub = n.subscribe<robot_world_state::world_state>("rx_big", 1, &sub_class::big_sub_callback,this);
-        ros::Subscriber small_sub = n.subscribe<robot_world_state::world_state>("rx_small", 1, &sub_class::small_sub_callback,this);
+		ros::Subscriber big_sub = n.subscribe<robot_world_state::world_state>("tx_big", 1, &sub_class::big_sub_callback,this);
+        ros::Subscriber small_sub = n.subscribe<robot_world_state::world_state>("tx_small", 1, &sub_class::small_sub_callback,this);
         ros::Publisher pub_ = n.advertise<robot_world_state::world_state>("pub_world_state",1);
         robot_world_state::world_state small;
         robot_world_state::world_state big;
@@ -41,7 +41,6 @@ void sub_class::and_gate(){
         whole.lighthouse_done = true ; 
     if(small.flag_done==true||small.flag_done==true)
         whole.flag_done = true ; 
-
     pub_.publish(whole);
 }
 int main(int argc, char **argv){
